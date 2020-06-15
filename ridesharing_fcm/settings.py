@@ -37,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'push_notifications',
 ]
+
+PUSH_NOTIFICATIONS_SETTINGS = {
+    'FCM_API_KEY': 'AAAA5xmexJI:APA91bHeX7HUD0o7qgYCkCubngpUhzAP1KFy9bU6fJ2qXGKDBvtWik2BlfM4GudnkWPs9X30N3okNL4WaXAaXi10R17wJQ5M-c-7g3euE9plvW7_UCHX-fRDF2rAMnIJhVT87yb-YygP',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
