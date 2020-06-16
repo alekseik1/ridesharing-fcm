@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'o%m^%_&i#drh+v7o&tayhdfkkzhn0d4vwo&b+hm50z8%^7wva7'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,7 +43,7 @@ INSTALLED_APPS = [
 ]
 
 PUSH_NOTIFICATIONS_SETTINGS = {
-    'FCM_API_KEY': 'AAAA5xmexJI:APA91bHeX7HUD0o7qgYCkCubngpUhzAP1KFy9bU6fJ2qXGKDBvtWik2BlfM4GudnkWPs9X30N3okNL4WaXAaXi10R17wJQ5M-c-7g3euE9plvW7_UCHX-fRDF2rAMnIJhVT87yb-YygP',
+    'FCM_API_KEY': os.environ['FCM_API_KEY']
 }
 
 MIDDLEWARE = [
