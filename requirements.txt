@@ -1,1 +1,2 @@
 django-push-notifications
+django
