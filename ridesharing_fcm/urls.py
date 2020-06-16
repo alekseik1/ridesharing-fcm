@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from .views import update_firebase_token, send_message_immediately
+from .views import update_firebase_token, send_message_immediately, send_message_datetime
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('update_token/', update_firebase_token),
     path('send_immediately', send_message_immediately),
+    path('send_at', send_message_datetime),
 ]
 urlpatterns += staticfiles_urlpatterns()

@@ -26,3 +26,14 @@ def send_message_immediately(request):
     title, message = request.GET['title'], request.GET['message']
     send_message_helper.delay(user_id=user_id, title=title, message=message)
     return HttpResponse('ok')
+
+
+def send_message_datetime(request):
+    """
+    Send message at given time. Time is timestamp
+    :param request: GET {'id', 'title', 'body', 'timestamp'}
+    """
+    user_id, timestamp = request.GET['id'], request.GET['timestamp']
+    time = datetime.fromtimestamp(timestamp)
+    title, message = request.GET['title'], request.GET['message']
+    send_message_helper.apply_async((user_id, title, message), eta=time)
