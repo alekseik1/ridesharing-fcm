@@ -2,3 +2,5 @@ django-push-notifications
 django
 gunicorn
 python-dotenv
+celery
+redis

@@ -29,6 +29,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# Redis for Celery
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+
 
 # Application definition
 

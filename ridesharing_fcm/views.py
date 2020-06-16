@@ -1,7 +1,11 @@
+from datetime import datetime
+
 from push_notifications.models import GCMDevice
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
+
 from django.http import HttpResponse
+
+from ridesharing_fcm.tasks import send_message_helper
 
 
 def update_firebase_token(request):
@@ -30,6 +34,5 @@ def send_message_immediately(request):
     """
     user_id = request.GET['id']
     title, message = request.GET['title'], request.GET['message']
-    device = get_object_or_404(GCMDevice, user_id=user_id)
-    device.send_message(title=title, message=message)
+    send_message_helper.delay(user_id=user_id, title=title, message=message)
     return HttpResponse('ok')
