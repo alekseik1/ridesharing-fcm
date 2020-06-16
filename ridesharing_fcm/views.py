@@ -1,11 +1,8 @@
 from datetime import datetime
 
-from push_notifications.models import GCMDevice
-from django.contrib.auth.models import User
-
 from django.http import HttpResponse
 
-from ridesharing_fcm.tasks import send_message_helper
+from ridesharing_fcm.tasks import send_message_helper, update_token
 
 
 def update_firebase_token(request):
@@ -15,14 +12,7 @@ def update_firebase_token(request):
     :param request: POST {'id', 'token'}, 'token' is new token
     """
     new_token, user_id = request.POST['token'], request.POST['id']
-    try:
-        device = GCMDevice.objects.get(user_id=user_id)
-        device.registration_id = new_token
-    except GCMDevice.DoesNotExist:
-        user = User(pk=user_id, username=user_id)
-        user.save()
-        device = GCMDevice(user_id=user_id, registration_id=new_token, cloud_message_type='FCM')
-    device.save()
+    update_token(user_id, new_token)
     return HttpResponse('ok')
 
 
