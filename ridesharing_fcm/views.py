@@ -31,7 +31,7 @@ def send_message_immediately(request):
 def send_message_datetime(request):
     """
     Send message at given time. Time is timestamp
-    :param request: GET {'id', 'title', 'body', 'timestamp'}
+    :param request: GET {'id', 'title', 'message', 'timestamp'}
     """
     user_id, timestamp = request.GET['id'], request.GET['timestamp']
     time = datetime.fromtimestamp(int(float(timestamp)))
