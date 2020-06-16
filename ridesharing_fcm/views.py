@@ -12,7 +12,7 @@ def update_firebase_token(request):
     :param request: POST {'id', 'token'}, 'token' is new token
     """
     new_token, user_id = request.POST['token'], request.POST['id']
-    update_token(user_id, new_token)
+    update_token.delay(user_id, new_token)
     return HttpResponse('ok')
 
 
