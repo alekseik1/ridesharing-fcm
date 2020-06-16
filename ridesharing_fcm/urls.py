@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from .views import update_firebase_token, send_message_immediately
 
@@ -23,3 +24,4 @@ urlpatterns = [
     path('update_token/', update_firebase_token),
     path('send_immediately', send_message_immediately),
 ]
+urlpatterns += staticfiles_urlpatterns()
