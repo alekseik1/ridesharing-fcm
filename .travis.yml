@@ -1,0 +1,25 @@
+language: generic
+cache: docker
+services:
+- docker
+jobs:
+  include:
+  - stage: deploy
+    name: "docker hub"
+    before_script:
+      - docker pull "$IMAGE_NAME" || true
+      - export major=0
+      - export version=$major.$TRAVIS_BUILD_NUMBER
+    script:
+      - docker build --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME" .
+    before_deploy:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    deploy:
+      - provider: script
+        script: bash +x deploy-docker.sh prod
+        on:
+          branch: master
+      - provider: script
+        script: bash +x deploy-docker.sh dev
+        on:
+          branch: dev
