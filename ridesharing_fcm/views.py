@@ -34,6 +34,7 @@ def send_message_datetime(request):
     :param request: GET {'id', 'title', 'body', 'timestamp'}
     """
     user_id, timestamp = request.GET['id'], request.GET['timestamp']
-    time = datetime.fromtimestamp(timestamp)
+    time = datetime.fromtimestamp(int(float(timestamp)))
     title, message = request.GET['title'], request.GET['message']
     send_message_helper.apply_async((user_id, title, message), eta=time)
+    return HttpResponse('ok')
